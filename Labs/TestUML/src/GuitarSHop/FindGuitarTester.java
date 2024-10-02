@@ -1,7 +1,5 @@
 package GuitarSHop;
 
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public class FindGuitarTester {
@@ -12,51 +10,39 @@ public class FindGuitarTester {
         initialiseInventory(inventory);
 
         //what customer is looking for
-        Guitar whatLookingFor = new Guitar("", 0, Builder.FENDER, Model.STRATOCASTOR,
-                GuitarType.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        GuitarSpec whatLookingFor = new GuitarSpec(Builder.FENDER, Model.STRATOCASTOR, GuitarType.ELECTRIC, Wood.ALDER, Wood.ALDER);
 
-        List matchingGuitars = inventory.search(whatLookingFor);
+        List<Guitar> matchingGuitars = whatLookingFor.search(inventory, whatLookingFor);
         listMatchingGuitars(matchingGuitars);
 
 
     }
 
-    public static void listMatchingGuitars(List matchingGuitars) {
+    public static void listMatchingGuitars(List<Guitar> matchingGuitars) {
         if (matchingGuitars.isEmpty()) {
             System.out.println("Sorry, we have nothing for you.");
         } else {
             System.out.println("You might like this: ");
-            for (Object matchingGuitar : matchingGuitars) {
-                Guitar guitar = (Guitar) matchingGuitar;
-                System.out.println(guitar.getSerialNumber() + " " + guitar.getPrice());
+            for (Guitar matchingGuitar : matchingGuitars) {
+                System.out.println(matchingGuitar.getSerialNumber() + " " + matchingGuitar.getPrice());
             }
         }
     }
 
     public static void initialiseInventory(Inventory inventory) {
         //add guitars to the inventory
+        GuitarSpec G1 = new GuitarSpec(Builder.FENDER, Model.STRATOCASTOR, GuitarType.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        GuitarSpec G2 = new GuitarSpec(Builder.COLLINS, Model.STRATOCASTOR, GuitarType.ELECTRIC, Wood.ALDER, Wood.ALDER);
         inventory.addGuitar("V00001",
-                1499.99,
-                Builder.FENDER,
-                Model.STRATOCASTOR,
-                GuitarType.ELECTRIC,
-                Wood.ALDER,
-                Wood.ALDER);
+                1499.99, G1);
 
         inventory.addGuitar("V00002",
-                1699.99,
-                Builder.FENDER,
-                Model.STRATOCASTOR,
-                GuitarType.ELECTRIC,
-                Wood.ALDER,
-                Wood.ALDER);
+                1699.99, G2);
+
 
         inventory.addGuitar("V00003",
-                899.99,
-                Builder.GIBSON,
-                Model.STRATOCASTOR,
-                GuitarType.ACOUSTIC,
-                Wood.MAHOGANY,
-                Wood.MAHOGANY);
+                899.99, G1);
+
+
     }
 }

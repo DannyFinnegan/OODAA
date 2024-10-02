@@ -3,47 +3,32 @@ package GuitarSHop;
 public class Guitar {
     private String serialNumber;
     private double price;
-    private Builder builder;
-    private Model model;
-    private GuitarType type;
-    private Wood backWood;
-    private Wood topWood;
+    private GuitarSpec spec;
 
-    public Guitar(String serialNumber, double price, Builder builder, Model model,
-                  GuitarType type, Wood backWood, Wood topWood) {
+
+    public Guitar(String serialNumber, double price, GuitarSpec spec) {
         this.serialNumber = serialNumber;
         this.price = price;
-        this.builder = builder;
-        this.model = model;
-        this.type = type;
-        this.backWood = backWood;
-        this.topWood = topWood;
+        this.spec = spec;
     }
 
-    public String getSerialNumber(){
+    public String getSerialNumber() {
         return serialNumber;
     }
-    public double getPrice(){
+
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(double newPrice){
+    public void setPrice(double newPrice) {
         this.price = newPrice;
     }
 
-    public Builder getBuilder(){
-        return builder;
+    public GuitarSpec getSpec() {
+        return spec;
     }
-    public Model getModel(){
-        return model;
-    }
-    public GuitarType getType(){
-        return type;
-    }
-    public Wood getBackwood(){
-        return backWood;
-    }
-    public Wood getTopwood(){
-        return topWood;
+
+    public void setSpec(GuitarSpec spec) {
+        this.spec = spec;
     }
 }
