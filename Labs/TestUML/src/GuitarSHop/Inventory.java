@@ -1,5 +1,6 @@
 package GuitarSHop;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,8 +17,15 @@ public class Inventory {
         guitars.add(guitar);
     }
 
-    public List<Guitar> getGuitars() {
-        return guitars;
+
+    public List search(GuitarSpec searchSpec) {
+        List<Guitar> matchingGuitars = new LinkedList();
+        for (Iterator i = guitars.iterator(); i.hasNext(); ) {
+            Guitar guitar = (Guitar) i.next();
+            if (guitar.getSpec().matches(searchSpec))
+                matchingGuitars.add(guitar);
+        }
+        return matchingGuitars;
     }
 
 }

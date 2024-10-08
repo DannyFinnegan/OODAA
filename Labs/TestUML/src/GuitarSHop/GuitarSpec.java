@@ -10,13 +10,15 @@ public class GuitarSpec {
     private GuitarType type;
     private Wood backWood;
     private Wood topWood;
+    private numStrings numStrings;
 
-    public GuitarSpec(Builder builder, Model model, GuitarType type,  Wood topWood, Wood backWood) {
+    public GuitarSpec(Builder builder, Model model, GuitarType type, Wood topWood, Wood backWood, numStrings numStrings) {
         this.builder = builder;
         this.topWood = topWood;
         this.backWood = backWood;
         this.type = type;
         this.model = model;
+        this.numStrings = numStrings;
     }
 
     public Builder getBuilder() {
@@ -58,29 +60,36 @@ public class GuitarSpec {
     public void setTopWood(Wood topWood) {
         this.topWood = topWood;
     }
-    public List<Guitar> search(Inventory inventory, GuitarSpec searchSpec) {
-        List<Guitar> matchingGuitars = new LinkedList<>();
-        for (Guitar guitar : inventory.getGuitars()) {
-            // ignore serialNumber since it is unique
-            // ignore price since it is irrelevant
-            if (searchSpec.getBuilder() != guitar.getSpec().getBuilder())
-                continue;
 
-            String model = searchSpec.getModel().toString().toLowerCase();
-            if (!model.equals(guitar.getSpec().getModel().toString().toLowerCase()))
-                continue;
+    public GuitarSHop.numStrings getNumStrings() {
+        return numStrings;
+    }
 
-            if (searchSpec.getType() != guitar.getSpec().getType())
-                continue;
+    public void setNumStrings(GuitarSHop.numStrings numStrings) {
+        this.numStrings = numStrings;
+    }
 
-            if (searchSpec.getBackWood() != null && !searchSpec.getBackWood().equals(guitar.getSpec().getBackWood()))
-                continue;
+    public boolean matches(GuitarSpec OtherSpec) {
+        if (builder != OtherSpec.getBuilder())
+            return false;
 
-            if (searchSpec.getTopWood() != null && !searchSpec.getTopWood().equals(guitar.getSpec().getTopWood()))
-                continue;
 
-            matchingGuitars.add(guitar);
-        }
-        return matchingGuitars;
+        if ((model != null) && (!model.equals("")) && !model.equals(OtherSpec.model))
+            return false;
+
+        if (type != OtherSpec.type)
+            return false;
+
+        if (backWood != OtherSpec.backWood)
+            return false;
+
+        if (topWood != OtherSpec.topWood)
+            return false;
+
+        if (numStrings != OtherSpec.numStrings)
+            return false;
+
+        return true;
     }
 }
+
