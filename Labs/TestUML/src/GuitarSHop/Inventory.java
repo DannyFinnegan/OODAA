@@ -4,23 +4,23 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Inventory {
+public class Inventory extends Instrument {
 
-    private List<Guitar> guitars;
+    private List instruments;
 
     public Inventory() {
-        guitars = new LinkedList<>();
+        instruments = new LinkedList();
     }
 
-    public void addGuitar(String serialNumber, double price, GuitarSpec spec) {
+    public void addInstruments(String serialNumber, double price, GuitarSpec spec) {
         Guitar guitar = new Guitar(serialNumber, price, spec);
-        guitars.add(guitar);
+        instruments.add(guitar);
     }
 
 
     public List search(GuitarSpec searchSpec) {
         List<Guitar> matchingGuitars = new LinkedList();
-        for (Iterator i = guitars.iterator(); i.hasNext(); ) {
+        for (Iterator i = instruments.iterator(); i.hasNext(); ) {
             Guitar guitar = (Guitar) i.next();
             if (guitar.getSpec().matches(searchSpec))
                 matchingGuitars.add(guitar);
